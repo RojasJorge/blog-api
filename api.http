@@ -1,0 +1,56 @@
+@hostname = http://localhost
+@port = 2003
+@host = {{hostname}}:{{port}}
+@api_key = t@un96&U$fY&PDC8#*2M
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvcmdlLmFsYmVydG8ucm9qYXMuc29sb3J6YW5vQGdtYWlsLmNvbSIsInNlY3JldCI6InVub2FsbnVldmUiLCJpYXQiOjE2NjE5MDg2ODF9.eQv73e3nAewsuQ3SiK0NKMpD-OTM-7xfrTy1bFOrghM
+
+GET {{host}}
+key: {{api_key}}
+
+### Login
+POST {{host}}/login
+key: {{api_key}}
+Content-Type: application/json
+
+{
+  "email": "jorge.alberto.rojas.solorzano@gmail.com",
+  "secret": "unoalnueve"
+}
+
+###
+GET {{host}}/api/user
+?posts=true
+key: {{api_key}}
+Authorization: {{token}}
+
+###
+GET {{host}}/api/user/3
+key: {{api_key}}
+Authorization: {{token}}
+
+### Create post
+POST {{host}}/api/post/
+key: {{api_key}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Pattern Matching en Elixir",
+  "authorId": 5,
+  "published": true,
+  "categories": {
+    "create": [{
+        "name": "Elixir lag"
+      }, {
+      "name": "Functional programing"
+      }
+    ]
+  }
+}
+
+### Get posts
+GET {{host}}/api/post
+?author=5
+key: {{api_key}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
